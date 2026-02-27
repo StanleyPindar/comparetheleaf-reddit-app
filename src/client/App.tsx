@@ -68,8 +68,7 @@ export const App: React.FC = () => {
   const clinics: MatchedClinic[] = result?.matchedClinics ?? [];
 
   return (
-    <div className="w-full h-screen overflow-hidden bg-[#f8fffe] font-sans">
-      <div className="w-full h-full overflow-y-auto">
+    <div style={{ position: 'absolute', inset: 0, overflowY: 'auto', WebkitOverflowScrolling: 'touch' as const, backgroundColor: '#f8fffe', fontFamily: '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif' }}>
         {screen === 'welcome' && (
           <Welcome onStart={() => setScreen('q1-condition')} />
         )}
@@ -144,7 +143,6 @@ export const App: React.FC = () => {
             onBack={() => setScreen('eligible')}
           />
         )}
-      </div>
     </div>
   );
 };

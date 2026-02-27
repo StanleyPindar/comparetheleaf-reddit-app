@@ -39,7 +39,7 @@ export const Welcome: React.FC<WelcomeProps> = ({ onStart }) => {
 };
 
 const styles: Record<string, React.CSSProperties> = {
-  container: { display: 'flex', flexDirection: 'column', alignItems: 'center', minHeight: '100%', padding: '40px 24px 32px', backgroundColor: '#f8fffe', fontFamily: '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif' },
+  container: { display: 'flex', flexDirection: 'column', alignItems: 'center', padding: '40px 24px 48px', fontFamily: '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif' },
   iconCircle: { width: 80, height: 80, borderRadius: '50%', backgroundColor: '#00a896', display: 'flex', alignItems: 'center', justifyContent: 'center', marginBottom: 24, flexShrink: 0 },
   iconLeaf: { fontSize: 36 },
   title: { fontSize: 26, fontWeight: 800, color: '#1a2e2b', textAlign: 'center', margin: '0 0 14px 0', lineHeight: 1.25, maxWidth: 380 },

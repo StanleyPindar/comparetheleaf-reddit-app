@@ -4,58 +4,47 @@ interface ResultIneligibleProps {
   onRetake: () => void;
 }
 
-export const ResultIneligible: React.FC<ResultIneligibleProps> = ({ onRetake }) => {
-  return (
-    <div className="flex flex-col min-h-screen p-6 bg-[#f8fffe]">
-      <div className="w-full max-w-md mx-auto">
-        <div className="text-center mb-8">
-          <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-[#fff3e0] mb-4">
-            <span className="text-3xl">💛</span>
-          </div>
-          <h1 className="text-2xl font-bold text-[#1a2e2b] mb-2">
-            Not quite eligible yet
-          </h1>
-          <p className="text-sm text-[#4a6b65] leading-relaxed">
-            Based on your answers, you may not yet meet the current UK criteria for a medical cannabis prescription. UK guidelines require patients to have tried at least 2 licensed treatments first.
-          </p>
-        </div>
-
-        <div className="bg-white rounded-2xl shadow-sm border border-[#e0f0ee] p-5 mb-6">
-          <h2 className="text-sm font-semibold text-[#1a2e2b] mb-3">What you can do next:</h2>
-          <ul className="space-y-3">
-            {[
-              { icon: '🏥', text: 'Speak to your GP about trying additional licensed treatments' },
-              { icon: '📋', text: 'Keep a symptom diary to support your case' },
-              { icon: '🔁', text: 'Check your eligibility again after trying more treatments' },
-            ].map((item, i) => (
-              <li key={i} className="flex items-start gap-3 text-sm text-[#4a6b65]">
-                <span className="text-lg leading-none">{item.icon}</span>
-                <span>{item.text}</span>
-              </li>
-            ))}
-          </ul>
-        </div>
-
-        <a
-          href="https://www.nhs.uk/conditions/medical-cannabis/"
-          target="_blank"
-          rel="noopener noreferrer"
-          className="block w-full py-4 border-2 border-[#00a896] text-[#00a896] font-semibold rounded-xl text-center text-base mb-3 hover:bg-[#e6f7f5] transition-colors"
-        >
-          NHS Medical Cannabis Guide →
-        </a>
-
-        <button
-          onClick={onRetake}
-          className="w-full py-3 border-2 border-[#e0f0ee] text-[#4a6b65] font-medium rounded-xl transition-colors text-sm hover:border-[#00a896]"
-        >
-          Start Over
-        </button>
-
-        <p className="text-center text-xs text-[#8aaba5] mt-4">
-          Powered by <span className="font-medium text-[#00a896]">CompareTheLeaf.co.uk</span>
-        </p>
+export const ResultIneligible: React.FC<ResultIneligibleProps> = ({ onRetake }) => (
+  <div style={s.page}>
+    <div style={s.inner}>
+      <div style={s.center}>
+        <div style={s.iconCircle}><span style={{ fontSize: 30 }}>💛</span></div>
+        <h1 style={s.title}>Not quite eligible yet</h1>
+        <p style={s.body}>Based on your answers, you may not yet meet the current UK criteria for a medical cannabis prescription. UK guidelines require patients to have tried at least 2 licensed treatments first.</p>
       </div>
+      <div style={s.card}>
+        <p style={s.cardTitle}>What you can do next:</p>
+        {[
+          { icon: '🏥', text: 'Speak to your GP about trying additional licensed treatments' },
+          { icon: '📋', text: 'Keep a symptom diary to support your case' },
+          { icon: '🔁', text: 'Check your eligibility again after trying more treatments' },
+        ].map((item, i) => (
+          <div key={i} style={s.row}>
+            <span style={{ fontSize: 20 }}>{item.icon}</span>
+            <span style={{ fontSize: 14, color: '#4a6b65' }}>{item.text}</span>
+          </div>
+        ))}
+      </div>
+      <a href="https://www.nhs.uk/conditions/medical-cannabis/" target="_blank" rel="noopener noreferrer" style={s.nhsLink}>
+        NHS Medical Cannabis Guide
+      </a>
+      <button onClick={onRetake} style={s.retakeBtn}>Start Over</button>
+      <p style={s.footer}>Powered by <span style={{ color: '#00a896', fontWeight: 600 }}>CompareTheLeaf.co.uk</span></p>
     </div>
-   );
+  </div>
+);
+
+const s: Record<string, React.CSSProperties> = {
+  page: { padding: '24px 20px 48px' },
+  inner: { maxWidth: 440, margin: '0 auto' },
+  center: { textAlign: 'center', marginBottom: 28 },
+  iconCircle: { display: 'inline-flex', alignItems: 'center', justifyContent: 'center', width: 64, height: 64, borderRadius: '50%', backgroundColor: '#fff3e0', marginBottom: 16 },
+  title: { fontSize: 22, fontWeight: 700, color: '#1a2e2b', margin: '0 0 10px 0' },
+  body: { fontSize: 14, color: '#4a6b65', lineHeight: 1.6, margin: 0 },
+  card: { backgroundColor: '#ffffff', border: '1.5px solid #e0f0ee', borderRadius: 16, padding: '18px 20px', marginBottom: 20 },
+  cardTitle: { fontSize: 14, fontWeight: 600, color: '#1a2e2b', margin: '0 0 14px 0' },
+  row: { display: 'flex', alignItems: 'flex-start', gap: 12, marginBottom: 12 },
+  nhsLink: { display: 'block', width: '100%', padding: '14px 0', border: '2px solid #00a896', color: '#00a896', borderRadius: 12, textAlign: 'center', fontSize: 15, fontWeight: 600, textDecoration: 'none', marginBottom: 12, boxSizing: 'border-box' },
+  retakeBtn: { width: '100%', padding: '14px 0', border: '2px solid #e0f0ee', backgroundColor: 'transparent', color: '#4a6b65', borderRadius: 12, fontSize: 14, fontWeight: 500, cursor: 'pointer', marginBottom: 16 },
+  footer: { textAlign: 'center', fontSize: 12, color: '#9ab5b0' },
 };

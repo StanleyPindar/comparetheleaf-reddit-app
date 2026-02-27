@@ -8,16 +8,13 @@ interface ProgressBarProps {
 export const ProgressBar: React.FC<ProgressBarProps> = ({ current, total }) => {
   const percentage = Math.round((current / total) * 100);
   return (
-    <div className="w-full mb-6">
-      <div className="flex justify-between text-xs text-[#8aaba5] mb-1">
+    <div style={{ width: '100%', marginBottom: 24 }}>
+      <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: 12, color: '#8aaba5', marginBottom: 6 }}>
         <span>Question {current} of {total}</span>
         <span>{percentage}%</span>
       </div>
-      <div className="w-full h-2 bg-[#e0f0ee] rounded-full overflow-hidden">
-        <div
-          className="h-full bg-[#00a896] rounded-full transition-all duration-300"
-          style={{ width: `${percentage}%` }}
-        />
+      <div style={{ width: '100%', height: 8, backgroundColor: '#e0f0ee', borderRadius: 99, overflow: 'hidden' }}>
+        <div style={{ height: '100%', backgroundColor: '#00a896', borderRadius: 99, width: `${percentage}%`, transition: 'width 0.3s' }} />
       </div>
     </div>
   );
