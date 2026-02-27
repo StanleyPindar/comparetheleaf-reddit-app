@@ -1,0 +1,25 @@
+{
+  "$schema": "https://developers.reddit.com/schema/config-file.v1.json",
+  "name": "compare-the-leaf",
+  "permissions": {
+    "http": {
+      "enable": true,
+      "domains": ["qikekawvvxcdgiqknlrn.supabase.co"]
+    },
+    "reddit": {
+      "enable": true
+    }
+  },
+  "post": {
+    "dir": "dist/client",
+    "entrypoints": {
+      "default": {
+        "entry": "game.html"
+      }
+    }
+  },
+  "server": {
+    "dir": "dist/server",
+    "entry": "index.cjs"
+  }
+}
