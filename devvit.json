@@ -26,5 +26,16 @@
   "server": {
     "dir": "dist/server",
     "entry": "index.cjs"
+  },
+  "menu": {
+    "items": [
+      {
+        "label": "Create Eligibility Checker Post",
+        "description": "Create a new UK Medical Cannabis Eligibility Checker post in this subreddit",
+        "forUserType": "moderator",
+        "location": "subreddit",
+        "endpoint": "/internal/menu/post-create"
+      }
+    ]
   }
 }
