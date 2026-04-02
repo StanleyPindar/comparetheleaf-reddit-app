@@ -4,8 +4,7 @@ const api = new Hono();
 
 const SUPABASE_URL =
   'https://qikekawvvxcdgiqknlrn.supabase.co/functions/v1/reddit-quiz-submission';
-const SUPABASE_ANON_KEY =
-  'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InFpa2VrYXd2dnhjZGdpcWtubHJuIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDk0MTg2MTcsImV4cCI6MjA2NDk5NDYxN30.UD8Pddyk6Q98fvGfynGowhswyA7mG0exE9RTtw0ZWdA';
+const SUPABASE_ANON_KEY = process.env.SUPABASE_ANON_KEY ?? '';
 
 // Maps clinic names (as returned by Supabase) to their verified slugs on comparetheleaf.co.uk
 const CLINIC_SLUG_MAP: Record<string, string> = {
