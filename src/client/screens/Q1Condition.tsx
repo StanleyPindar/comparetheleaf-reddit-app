@@ -32,7 +32,7 @@ export const Q1Condition: React.FC<Q1ConditionProps> = ({ selected, onSelect, on
 /* ── Shared sub-components ─────────────────────────────────── */
 
 export const ProgressBar: React.FC<{ current: number; total: number }> = ({ current, total }) => (
-  <div style={{ marginBottom: 24 }}>
+  <div style={{ marginBottom: 14 }}>
     <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: 12, color: '#8aaba5', marginBottom: 6 }}>
       <span>Question {current} of {total}</span>
       <span>{Math.round((current / total) * 100)}%</span>
@@ -44,17 +44,17 @@ export const ProgressBar: React.FC<{ current: number; total: number }> = ({ curr
 );
 
 export const OptionBtn: React.FC<{ label: string; selected: boolean; onClick: () => void }> = ({ label, selected, onClick }) => (
-  <button onClick={onClick} style={{ display: 'flex', alignItems: 'center', gap: 12, width: '100%', padding: '12px 16px', borderRadius: 12, border: `2px solid ${selected ? '#00a896' : '#e0f0ee'}`, backgroundColor: selected ? '#e6f7f5' : '#ffffff', color: selected ? '#00a896' : '#1a2e2b', fontSize: 14, fontWeight: 500, textAlign: 'left', cursor: 'pointer' }}>
+  <button onClick={onClick} style={{ display: 'flex', alignItems: 'center', gap: 10, width: '100%', padding: '9px 14px', borderRadius: 10, border: `2px solid ${selected ? '#00a896' : '#e0f0ee'}`, backgroundColor: selected ? '#e6f7f5' : '#ffffff', color: selected ? '#00a896' : '#1a2e2b', fontSize: 13, fontWeight: 500, textAlign: 'left', cursor: 'pointer' }}>
     <span style={{ width: 16, height: 16, borderRadius: '50%', border: `2px solid ${selected ? '#00a896' : '#c0d8d4'}`, backgroundColor: selected ? '#00a896' : 'transparent', flexShrink: 0, display: 'inline-block' }} />
     {label}
   </button>
 );
 
 const s: Record<string, React.CSSProperties> = {
-  page: { padding: '24px 20px 48px' },
+  page: { padding: '16px 20px 20px' },
   inner: { maxWidth: 440, margin: '0 auto' },
-  heading: { fontSize: 20, fontWeight: 700, color: '#1a2e2b', margin: '0 0 8px 0' },
-  sub: { fontSize: 14, color: '#4a6b65', margin: '0 0 20px 0' },
-  list: { display: 'flex', flexDirection: 'column', gap: 10, marginBottom: 24 },
-  btn: { width: '100%', padding: '16px 24px', color: '#ffffff', border: 'none', borderRadius: 12, fontSize: 16, fontWeight: 700 },
+  heading: { fontSize: 18, fontWeight: 700, color: '#1a2e2b', margin: '0 0 5px 0' },
+  sub: { fontSize: 13, color: '#4a6b65', margin: '0 0 12px 0' },
+  list: { display: 'flex', flexDirection: 'column', gap: 6, marginBottom: 14 },
+  btn: { width: '100%', padding: '13px 24px', color: '#ffffff', border: 'none', borderRadius: 12, fontSize: 15, fontWeight: 700 },
 };

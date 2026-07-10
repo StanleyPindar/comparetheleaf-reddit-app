@@ -7,8 +7,10 @@ interface WelcomeProps {
 export const Welcome: React.FC<WelcomeProps> = ({ onStart }) => {
   return (
     <div style={styles.container}>
-      <div style={styles.iconCircle}>
-        <span style={styles.iconLeaf}>🌿</span>
+      {/* CompareTheLeaf wordmark — replaces generic green circle */}
+      <div style={styles.logoWrap}>
+        <span style={styles.logoLeaf}>🌿</span>
+        <span style={styles.logoText}>CompareTheLeaf</span>
       </div>
       <h1 style={styles.title}>UK Medical Cannabis Eligibility Checker</h1>
       <p style={styles.subtitle}>
@@ -39,17 +41,18 @@ export const Welcome: React.FC<WelcomeProps> = ({ onStart }) => {
 };
 
 const styles: Record<string, React.CSSProperties> = {
-  container: { display: 'flex', flexDirection: 'column', alignItems: 'center', padding: '40px 24px 48px', fontFamily: '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif' },
-  iconCircle: { width: 80, height: 80, borderRadius: '50%', backgroundColor: '#00a896', display: 'flex', alignItems: 'center', justifyContent: 'center', marginBottom: 24, flexShrink: 0 },
-  iconLeaf: { fontSize: 36 },
-  title: { fontSize: 26, fontWeight: 800, color: '#1a2e2b', textAlign: 'center', margin: '0 0 14px 0', lineHeight: 1.25, maxWidth: 380 },
-  subtitle: { fontSize: 15, color: '#4a6b65', textAlign: 'center', lineHeight: 1.6, margin: '0 0 28px 0', maxWidth: 380 },
-  card: { width: '100%', maxWidth: 420, backgroundColor: '#ffffff', border: '1.5px solid #e0f0ee', borderRadius: 16, padding: '20px 24px', marginBottom: 28 },
-  cardHeading: { fontSize: 14, fontWeight: 700, color: '#1a2e2b', marginBottom: 14 },
-  checkRow: { display: 'flex', alignItems: 'center', gap: 12, marginBottom: 10 },
-  checkIcon: { color: '#00a896', fontWeight: 700, fontSize: 16, flexShrink: 0 },
-  checkText: { fontSize: 14, color: '#2d4a45' },
-  ctaButton: { width: '100%', maxWidth: 420, padding: '18px 24px', backgroundColor: '#00a896', color: '#ffffff', border: 'none', borderRadius: 14, fontSize: 17, fontWeight: 700, cursor: 'pointer', marginBottom: 18, letterSpacing: '-0.2px' },
-  footer: { fontSize: 12, color: '#9ab5b0', textAlign: 'center' },
+  container: { display: 'flex', flexDirection: 'column', alignItems: 'center', padding: '28px 24px 36px', fontFamily: '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif' },
+  logoWrap: { display: 'flex', alignItems: 'center', gap: 8, marginBottom: 18 },
+  logoLeaf: { fontSize: 26 },
+  logoText: { fontSize: 21, fontWeight: 800, color: '#00a896', letterSpacing: '-0.5px' },
+  title: { fontSize: 22, fontWeight: 800, color: '#1a2e2b', textAlign: 'center', margin: '0 0 10px 0', lineHeight: 1.25, maxWidth: 380 },
+  subtitle: { fontSize: 14, color: '#4a6b65', textAlign: 'center', lineHeight: 1.6, margin: '0 0 20px 0', maxWidth: 380 },
+  card: { width: '100%', maxWidth: 420, backgroundColor: '#ffffff', border: '1.5px solid #e0f0ee', borderRadius: 16, padding: '16px 20px', marginBottom: 22 },
+  cardHeading: { fontSize: 13, fontWeight: 700, color: '#1a2e2b', marginBottom: 11 },
+  checkRow: { display: 'flex', alignItems: 'center', gap: 12, marginBottom: 8 },
+  checkIcon: { color: '#00a896', fontWeight: 700, fontSize: 15, flexShrink: 0 },
+  checkText: { fontSize: 13, color: '#2d4a45' },
+  ctaButton: { width: '100%', maxWidth: 420, padding: '16px 24px', backgroundColor: '#00a896', color: '#ffffff', border: 'none', borderRadius: 14, fontSize: 16, fontWeight: 700, cursor: 'pointer', marginBottom: 14, letterSpacing: '-0.2px' },
+  footer: { fontSize: 11, color: '#9ab5b0', textAlign: 'center' },
   footerLink: { color: '#00a896', fontWeight: 600 },
 };

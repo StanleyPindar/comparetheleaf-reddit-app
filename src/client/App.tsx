@@ -18,7 +18,7 @@ export const App: React.FC = () => {
     severity: null,
     format: null,
     budget: null,
-    consultationType: null,
+    consultationType: 'video', // All UK clinics are video-only
   });
   const [result, setResult] = useState<ApiResult | null>(null);
 
@@ -34,9 +34,8 @@ export const App: React.FC = () => {
             previousTreatments: quiz.previousTreatments ?? 0,
             ...(quiz.severity ? { conditionDetails: { severity: quiz.severity } } : {}),
             preferences: {
-              ...(quiz.format ? { format: quiz.format } : {}),
+              consultationType: 'video', // All UK clinics are video-only
               ...(quiz.budget ? { budget: quiz.budget } : {}),
-              ...(quiz.consultationType ? { consultationType: quiz.consultationType } : {}),
             },
           },
         }),
@@ -59,7 +58,7 @@ export const App: React.FC = () => {
       severity: null,
       format: null,
       budget: null,
-      consultationType: null,
+      consultationType: 'video',
     });
     setResult(null);
     setScreen('welcome');
@@ -112,12 +111,8 @@ export const App: React.FC = () => {
 
         {screen === 'q4-preferences' && (
           <Q4Preferences
-            format={quiz.format}
             budget={quiz.budget}
-            consultationType={quiz.consultationType}
-            onFormatSelect={(v) => setQuiz((q) => ({ ...q, format: v }))}
             onBudgetSelect={(v) => setQuiz((q) => ({ ...q, budget: v }))}
-            onConsultationSelect={(v) => setQuiz((q) => ({ ...q, consultationType: v }))}
             onSubmit={submitQuiz}
             onBack={() => setScreen('q3-severity')}
           />
