@@ -1,50 +1,38 @@
 import React from 'react';
 
-interface ResultIneligibleProps {
+type ResultIneligibleProps = {
+  message?: string;
+  onBackToTreatments: () => void;
   onRetake: () => void;
-}
+};
 
-export const ResultIneligible: React.FC<ResultIneligibleProps> = ({ onRetake }) => (
-  <div style={s.page}>
-    <div style={s.inner}>
-      <div style={s.center}>
-        <div style={s.iconCircle}><span style={{ fontSize: 30 }}>💛</span></div>
-        <h1 style={s.title}>Not quite eligible yet</h1>
-        <p style={s.body}>Based on your answers, you may not yet meet the current UK criteria for a medical cannabis prescription. UK guidelines require patients to have tried at least 2 licensed treatments first.</p>
+export const ResultIneligible: React.FC<ResultIneligibleProps> = ({ message, onBackToTreatments, onRetake }) => (
+  <div style={styles.page}>
+    <div style={styles.inner}>
+      <div style={styles.icon} aria-hidden="true">i</div>
+      <h1 id="screen-title" tabIndex={-1} style={styles.title}>More information may be needed first</h1>
+      <p style={styles.body}>{message ?? 'Your answers suggest that more treatment history may be needed before a specialist can consider next steps.'}</p>
+      <div style={styles.card}>
+        <p style={styles.cardTitle}>What you can do next</p>
+        <p style={styles.cardBody}>Speak to a qualified healthcare professional about your symptoms and current treatment options. A short questionnaire cannot decide whether any treatment is suitable for you.</p>
       </div>
-      <div style={s.card}>
-        <p style={s.cardTitle}>What you can do next:</p>
-        {[
-          { icon: '🏥', text: 'Speak to your GP about trying additional licensed treatments' },
-          { icon: '📋', text: 'Keep a symptom diary to support your case' },
-          { icon: '🔁', text: 'Check your eligibility again after trying more treatments' },
-        ].map((item, i) => (
-          <div key={i} style={s.row}>
-            <span style={{ fontSize: 20 }}>{item.icon}</span>
-            <span style={{ fontSize: 14, color: '#4a6b65' }}>{item.text}</span>
-          </div>
-        ))}
-      </div>
-      <a href="https://www.nhs.uk/conditions/medical-cannabis/" target="_blank" rel="noopener noreferrer" style={s.nhsLink}>
-        NHS Medical Cannabis Guide
-      </a>
-      <button onClick={onRetake} style={s.retakeBtn}>Start Over</button>
-      <p style={s.footer}>Powered by <span style={{ color: '#00a896', fontWeight: 600 }}>CompareTheLeaf.co.uk</span></p>
+      <button type="button" onClick={onBackToTreatments} style={styles.primaryButton}>← Review treatment answer</button>
+      <button type="button" onClick={onRetake} style={styles.secondaryButton}>Start again</button>
+      <p style={styles.footer}>CompareTheLeaf is an information and comparison platform, not a clinic.</p>
     </div>
   </div>
 );
 
-const s: Record<string, React.CSSProperties> = {
-  page: { padding: '24px 20px 48px' },
-  inner: { maxWidth: 440, margin: '0 auto' },
-  center: { textAlign: 'center', marginBottom: 28 },
-  iconCircle: { display: 'inline-flex', alignItems: 'center', justifyContent: 'center', width: 64, height: 64, borderRadius: '50%', backgroundColor: '#fff3e0', marginBottom: 16 },
-  title: { fontSize: 22, fontWeight: 700, color: '#1a2e2b', margin: '0 0 10px 0' },
-  body: { fontSize: 14, color: '#4a6b65', lineHeight: 1.6, margin: 0 },
-  card: { backgroundColor: '#ffffff', border: '1.5px solid #e0f0ee', borderRadius: 16, padding: '18px 20px', marginBottom: 20 },
-  cardTitle: { fontSize: 14, fontWeight: 600, color: '#1a2e2b', margin: '0 0 14px 0' },
-  row: { display: 'flex', alignItems: 'flex-start', gap: 12, marginBottom: 12 },
-  nhsLink: { display: 'block', width: '100%', padding: '14px 0', border: '2px solid #00a896', color: '#00a896', borderRadius: 12, textAlign: 'center', fontSize: 15, fontWeight: 600, textDecoration: 'none', marginBottom: 12, boxSizing: 'border-box' },
-  retakeBtn: { width: '100%', padding: '14px 0', border: '2px solid #e0f0ee', backgroundColor: 'transparent', color: '#4a6b65', borderRadius: 12, fontSize: 14, fontWeight: 500, cursor: 'pointer', marginBottom: 16 },
-  footer: { textAlign: 'center', fontSize: 12, color: '#9ab5b0' },
+const styles: Record<string, React.CSSProperties> = {
+  page: { padding: '32px 20px 40px' },
+  inner: { maxWidth: 440, margin: '0 auto', textAlign: 'center' },
+  icon: { display: 'inline-flex', alignItems: 'center', justifyContent: 'center', width: 52, height: 52, borderRadius: '50%', backgroundColor: '#fff4db', color: '#7a5300', fontSize: 28, fontWeight: 750, marginBottom: 14 },
+  title: { fontSize: 22, fontWeight: 750, color: '#1a2e2b', margin: '0 0 10px 0', outline: 'none' },
+  body: { fontSize: 15, color: '#315e54', lineHeight: 1.55, margin: '0 0 20px 0' },
+  card: { backgroundColor: '#ffffff', border: '1px solid #c9e2dc', borderRadius: 14, padding: 16, marginBottom: 18, textAlign: 'left' },
+  cardTitle: { fontSize: 14, fontWeight: 700, color: '#1a2e2b', margin: '0 0 6px 0' },
+  cardBody: { fontSize: 13, color: '#4a6b65', lineHeight: 1.5, margin: 0 },
+  primaryButton: { width: '100%', minHeight: 48, padding: '12px 16px', backgroundColor: '#1a7f5a', color: '#ffffff', border: 'none', borderRadius: 12, fontSize: 15, fontWeight: 700, cursor: 'pointer', marginBottom: 10 },
+  secondaryButton: { width: '100%', minHeight: 48, padding: '12px 16px', backgroundColor: '#ffffff', color: '#315e54', border: '2px solid #a7c9c1', borderRadius: 12, fontSize: 14, fontWeight: 700, cursor: 'pointer', marginBottom: 14 },
+  footer: { fontSize: 12, color: '#4a6b65', lineHeight: 1.5, margin: 0 },
 };

@@ -1,5 +1,5 @@
 import React from 'react';
-import { ProgressBar, OptionBtn } from './Q1Condition';
+import { OptionButton, ProgressBar } from './Q1Condition';
 
 const OPTIONS = [
   { label: 'None — I have not tried any treatments yet', value: 0 },
@@ -8,41 +8,51 @@ const OPTIONS = [
   { label: '3 or more treatments', value: 3 },
 ];
 
-interface Q2TreatmentsProps {
+type Q2TreatmentsProps = {
   selected: number | null;
   onSelect: (value: number) => void;
   onNext: (value: number) => void;
   onBack: () => void;
-}
+};
 
 export const Q2Treatments: React.FC<Q2TreatmentsProps> = ({ selected, onSelect, onNext, onBack }) => (
-  <div style={s.page}>
-    <div style={s.inner}>
+  <div style={styles.page}>
+    <div style={styles.inner}>
       <ProgressBar current={2} total={4} />
-      <h2 style={s.heading}>How many conventional treatments have you tried?</h2>
-      <p style={s.sub}>UK guidelines require patients to have tried at least 2 licensed treatments before being prescribed medical cannabis.</p>
-      <div style={s.list}>
-        {OPTIONS.map((o) => (
-          <OptionBtn key={o.value} label={o.label} selected={selected === o.value} onClick={() => onSelect(o.value)} />
+      <h1 id="screen-title" tabIndex={-1} style={styles.heading}>How many treatments have you tried?</h1>
+      <p style={styles.sub}>Include treatments you have tried for this condition. This is used as one part of the preliminary guide.</p>
+      <div role="radiogroup" aria-label="Number of treatments tried" style={styles.list}>
+        {OPTIONS.map((option) => (
+          <OptionButton
+            key={option.value}
+            label={option.label}
+            selected={selected === option.value}
+            onClick={() => onSelect(option.value)}
+          />
         ))}
       </div>
-      <div style={s.row}>
-        <button onClick={onBack} style={s.backBtn}>← Back</button>
-        <button onClick={() => onNext(selected ?? 0)} disabled={selected === null} style={{ ...s.nextBtn, backgroundColor: selected !== null ? '#00a896' : '#b0d8d4', cursor: selected !== null ? 'pointer' : 'default' }}>
-          Next →
+      <div style={styles.row}>
+        <button type="button" onClick={onBack} style={styles.backButton}>← Back</button>
+        <button
+          type="button"
+          onClick={() => onNext(selected ?? 0)}
+          disabled={selected === null}
+          style={{ ...styles.nextButton, backgroundColor: selected !== null ? '#1a7f5a' : '#b0d8d4' }}
+        >
+          Continue →
         </button>
       </div>
     </div>
   </div>
 );
 
-const s: Record<string, React.CSSProperties> = {
-  page: { padding: '24px 20px 48px' },
+const styles: Record<string, React.CSSProperties> = {
+  page: { padding: '24px 20px 40px' },
   inner: { maxWidth: 440, margin: '0 auto' },
-  heading: { fontSize: 20, fontWeight: 700, color: '#1a2e2b', margin: '0 0 8px 0' },
-  sub: { fontSize: 14, color: '#4a6b65', margin: '0 0 20px 0', lineHeight: 1.5 },
-  list: { display: 'flex', flexDirection: 'column', gap: 10, marginBottom: 24 },
+  heading: { fontSize: 20, fontWeight: 750, color: '#1a2e2b', margin: '0 0 8px 0', outline: 'none' },
+  sub: { fontSize: 14, color: '#4a6b65', margin: '0 0 18px 0', lineHeight: 1.5 },
+  list: { display: 'flex', flexDirection: 'column', gap: 9, marginBottom: 22 },
   row: { display: 'flex', gap: 12 },
-  backBtn: { flex: 1, padding: '16px 0', border: '2px solid #e0f0ee', backgroundColor: 'transparent', color: '#4a6b65', borderRadius: 12, fontSize: 15, fontWeight: 600, cursor: 'pointer' },
-  nextBtn: { flex: 2, padding: '16px 0', color: '#ffffff', border: 'none', borderRadius: 12, fontSize: 15, fontWeight: 700 },
+  backButton: { flex: 1, minHeight: 48, padding: '12px 0', border: '2px solid #a7c9c1', backgroundColor: '#ffffff', color: '#315e54', borderRadius: 12, fontSize: 15, fontWeight: 700, cursor: 'pointer' },
+  nextButton: { flex: 2, minHeight: 48, padding: '12px 0', color: '#ffffff', border: 'none', borderRadius: 12, fontSize: 15, fontWeight: 700, cursor: 'pointer' },
 };

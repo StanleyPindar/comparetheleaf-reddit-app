@@ -1,61 +1,59 @@
 import React from 'react';
-import { ProgressBar, OptionBtn } from './Q1Condition';
+import { OptionButton, ProgressBar } from './Q1Condition';
 
-// NOTE: format and consultationType props are kept for API compatibility but
-// the format section has been removed (not clinically relevant) and
-// consultationType is hardcoded to 'video' in App.tsx (all UK clinics are video).
-
-interface Q4PreferencesProps {
+type Q4PreferencesProps = {
   budget: string | null;
   onBudgetSelect: (value: string) => void;
   onSubmit: () => void;
   onBack: () => void;
-}
+};
 
-export const Q4Preferences: React.FC<Q4PreferencesProps> = ({
-  budget,
-  onBudgetSelect,
-  onSubmit,
-  onBack,
-}) => (
-  <div style={s.page}>
-    <div style={s.inner}>
+const BUDGET_OPTIONS = [
+  { label: 'Under £100 per month', value: 'under-100' },
+  { label: '£100 to £250 per month', value: '100-250' },
+  { label: '£250 to £500 per month', value: '250-500' },
+  { label: 'Over £500 per month', value: 'over-500' },
+  { label: 'No preference', value: 'flexible' },
+];
+
+export const Q4Preferences: React.FC<Q4PreferencesProps> = ({ budget, onBudgetSelect, onSubmit, onBack }) => (
+  <div style={styles.page}>
+    <div style={styles.inner}>
       <ProgressBar current={4} total={4} />
-      <h2 style={s.heading}>Your preferences</h2>
-      <p style={s.sub}>Optional — helps us find your best clinic match.</p>
+      <h1 id="screen-title" tabIndex={-1} style={styles.heading}>One final preference</h1>
+      <p style={styles.sub}>Optional — choose a budget range for clinic fees to make the comparison more useful.</p>
 
-      <p style={s.label}>Monthly budget (clinic fees + medication)</p>
-      <div style={s.list}>
-        {[
-          { label: 'Under £100 / month', value: 'under-100' },
-          { label: '£100 – £250 / month', value: '100-250' },
-          { label: '£250 – £500 / month', value: '250-500' },
-          { label: 'Over £500 / month', value: 'over-500' },
-          { label: 'No preference', value: 'flexible' },
-        ].map((o) => (
-          <OptionBtn key={o.value} label={o.label} selected={budget === o.value} onClick={() => onBudgetSelect(o.value)} />
+      <p style={styles.label}>Monthly budget</p>
+      <div role="radiogroup" aria-label="Monthly clinic fee budget" style={styles.list}>
+        {BUDGET_OPTIONS.map((option) => (
+          <OptionButton
+            key={option.value}
+            label={option.label}
+            selected={budget === option.value}
+            onClick={() => onBudgetSelect(option.value)}
+          />
         ))}
       </div>
 
-      <p style={s.note}>All UK medical cannabis clinics operate via video call — no in-person visit required.</p>
+      <p style={styles.note}>You can review clinic details and appointment formats before choosing what to do next.</p>
 
-      <div style={s.row}>
-        <button onClick={onBack} style={s.backBtn}>Back</button>
-        <button onClick={onSubmit} style={s.submitBtn}>Check Eligibility</button>
+      <div style={styles.row}>
+        <button type="button" onClick={onBack} style={styles.backButton}>← Back</button>
+        <button type="button" onClick={onSubmit} style={styles.submitButton}>See clinic options →</button>
       </div>
     </div>
   </div>
 );
 
-const s: Record<string, React.CSSProperties> = {
+const styles: Record<string, React.CSSProperties> = {
   page: { padding: '20px 20px 40px' },
   inner: { maxWidth: 440, margin: '0 auto' },
-  heading: { fontSize: 18, fontWeight: 700, color: '#1a2e2b', margin: '0 0 6px 0' },
-  sub: { fontSize: 13, color: '#4a6b65', margin: '0 0 18px 0' },
-  label: { fontSize: 14, fontWeight: 600, color: '#1a2e2b', margin: '0 0 10px 0' },
+  heading: { fontSize: 20, fontWeight: 750, color: '#1a2e2b', margin: '0 0 6px 0', outline: 'none' },
+  sub: { fontSize: 14, color: '#4a6b65', margin: '0 0 18px 0', lineHeight: 1.5 },
+  label: { fontSize: 14, fontWeight: 700, color: '#1a2e2b', margin: '0 0 10px 0' },
   list: { display: 'flex', flexDirection: 'column', gap: 8, marginBottom: 16 },
-  note: { fontSize: 12, color: '#8aaba5', margin: '0 0 20px 0', lineHeight: 1.5 },
-  row: { display: 'flex', gap: 12, marginTop: 4 },
-  backBtn: { flex: 1, padding: '15px 0', border: '2px solid #e0f0ee', backgroundColor: 'transparent', color: '#4a6b65', borderRadius: 12, fontSize: 14, fontWeight: 600, cursor: 'pointer' },
-  submitBtn: { flex: 2, padding: '15px 0', backgroundColor: '#00a896', color: '#ffffff', border: 'none', borderRadius: 12, fontSize: 15, fontWeight: 700, cursor: 'pointer' },
+  note: { fontSize: 12, color: '#4a6b65', margin: '0 0 20px 0', lineHeight: 1.5 },
+  row: { display: 'flex', gap: 12 },
+  backButton: { flex: 1, minHeight: 48, padding: '12px 0', border: '2px solid #a7c9c1', backgroundColor: '#ffffff', color: '#315e54', borderRadius: 12, fontSize: 14, fontWeight: 700, cursor: 'pointer' },
+  submitButton: { flex: 2, minHeight: 48, padding: '12px 0', backgroundColor: '#1a7f5a', color: '#ffffff', border: 'none', borderRadius: 12, fontSize: 15, fontWeight: 700, cursor: 'pointer' },
 };

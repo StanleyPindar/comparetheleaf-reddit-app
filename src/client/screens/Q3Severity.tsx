@@ -1,47 +1,57 @@
 import React from 'react';
-import { ProgressBar, OptionBtn } from './Q1Condition';
+import { OptionButton, ProgressBar } from './Q1Condition';
 
 const OPTIONS = [
   { label: 'Mild — manageable but affects daily life', value: 'mild' },
   { label: 'Moderate — significantly impacts daily activities', value: 'moderate' },
-  { label: 'Severe — debilitating, hard to function', value: 'severe' },
+  { label: 'Severe — difficult to manage day to day', value: 'severe' },
 ];
 
-interface Q3SeverityProps {
+type Q3SeverityProps = {
   selected: string | null;
   onSelect: (value: string) => void;
   onNext: () => void;
   onBack: () => void;
-}
+};
 
 export const Q3Severity: React.FC<Q3SeverityProps> = ({ selected, onSelect, onNext, onBack }) => (
-  <div style={s.page}>
-    <div style={s.inner}>
+  <div style={styles.page}>
+    <div style={styles.inner}>
       <ProgressBar current={3} total={4} />
-      <h2 style={s.heading}>How severe is your condition?</h2>
-      <p style={s.sub}>This helps us match you with the most appropriate clinic.</p>
-      <div style={s.list}>
-        {OPTIONS.map((o) => (
-          <OptionBtn key={o.value} label={o.label} selected={selected === o.value} onClick={() => onSelect(o.value)} />
+      <h1 id="screen-title" tabIndex={-1} style={styles.heading}>How much does it affect day-to-day life?</h1>
+      <p style={styles.sub}>This helps make the clinic comparison more relevant to the information you share.</p>
+      <div role="radiogroup" aria-label="Condition severity" style={styles.list}>
+        {OPTIONS.map((option) => (
+          <OptionButton
+            key={option.value}
+            label={option.label}
+            selected={selected === option.value}
+            onClick={() => onSelect(option.value)}
+          />
         ))}
       </div>
-      <div style={s.row}>
-        <button onClick={onBack} style={s.backBtn}>← Back</button>
-        <button onClick={onNext} disabled={!selected} style={{ ...s.nextBtn, backgroundColor: selected ? '#00a896' : '#b0d8d4', cursor: selected ? 'pointer' : 'default' }}>
-          Next →
+      <div style={styles.row}>
+        <button type="button" onClick={onBack} style={styles.backButton}>← Back</button>
+        <button
+          type="button"
+          onClick={onNext}
+          disabled={!selected}
+          style={{ ...styles.nextButton, backgroundColor: selected ? '#1a7f5a' : '#b0d8d4' }}
+        >
+          Continue →
         </button>
       </div>
     </div>
   </div>
 );
 
-const s: Record<string, React.CSSProperties> = {
-  page: { padding: '24px 20px 48px' },
+const styles: Record<string, React.CSSProperties> = {
+  page: { padding: '24px 20px 40px' },
   inner: { maxWidth: 440, margin: '0 auto' },
-  heading: { fontSize: 20, fontWeight: 700, color: '#1a2e2b', margin: '0 0 8px 0' },
-  sub: { fontSize: 14, color: '#4a6b65', margin: '0 0 20px 0' },
+  heading: { fontSize: 20, fontWeight: 750, color: '#1a2e2b', margin: '0 0 8px 0', outline: 'none' },
+  sub: { fontSize: 14, color: '#4a6b65', margin: '0 0 18px 0', lineHeight: 1.5 },
   list: { display: 'flex', flexDirection: 'column', gap: 10, marginBottom: 24 },
   row: { display: 'flex', gap: 12 },
-  backBtn: { flex: 1, padding: '16px 0', border: '2px solid #e0f0ee', backgroundColor: 'transparent', color: '#4a6b65', borderRadius: 12, fontSize: 15, fontWeight: 600, cursor: 'pointer' },
-  nextBtn: { flex: 2, padding: '16px 0', color: '#ffffff', border: 'none', borderRadius: 12, fontSize: 15, fontWeight: 700 },
+  backButton: { flex: 1, minHeight: 48, padding: '12px 0', border: '2px solid #a7c9c1', backgroundColor: '#ffffff', color: '#315e54', borderRadius: 12, fontSize: 15, fontWeight: 700, cursor: 'pointer' },
+  nextButton: { flex: 2, minHeight: 48, padding: '12px 0', color: '#ffffff', border: 'none', borderRadius: 12, fontSize: 15, fontWeight: 700, cursor: 'pointer' },
 };
